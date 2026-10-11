@@ -24,7 +24,7 @@ These are proposed implementation defaults, selected to make the handoff executa
 4. Avoid visually rearranging Gmail's native message rows in v1. Use a separate extension-owned list for priority order, because Gmail's keyboard navigation and checkbox actions otherwise become inconsistent with visual order.
 5. Classify loaded unread messages by default. Offer an explicit option to include loaded read messages.
 6. Only loaded list rows are in scope. Do not imply the extension has searched the entire account.
-7. Use the user's own TypeSafe API key. No backend, extension account, subscription, or telemetry is needed for v1. Provider charges are separate.
+7. The developer/user provides their Jev key in a local, gitignored `.env` file for development; installed extension users enter it in extension settings. Follow the key provisioning workflow in section 8. No backend, extension account, subscription, or telemetry is needed for v1. Provider charges are separate.
 8. Use direct TypeSafe HTTP calls first. Keep the provider behind an interface so Vercel AI Gateway can be added later.
 9. Build a local fixture mode early so development and automated tests do not require a real inbox or paid API requests.
 
@@ -217,6 +217,8 @@ jev_gmail_extension/
   pnpm-lock.yaml
   .nvmrc
   .gitignore
+  .env.example                 # placeholder only; .env is local and ignored
+  scripts/setup-local-key.ts   # optional local provisioning helper
   .prettierignore
   .prettierrc.json
   eslint.config.mjs
@@ -320,6 +322,29 @@ Initial request behavior:
 
 A successful connection test proves connectivity only, not classification accuracy. Use fixture mode for offline demos and tests.
 
+### API key provisioning: local `.env` and extension settings
+
+The Jev API key will be provided by the developer/user in a local `.env` file at the repository root:
+
+```dotenv
+TYPESAFE_API_KEY=your_jev_api_key_here
+```
+
+Commit `.env.example` with a placeholder only. Ignore `.env`, `.env.*` (except `.env.example`), browser profiles, and any local credential artifacts. Never ask the user to commit the real key, including to this private repository.
+
+Chrome extensions do not natively load a repository `.env` file or Node's `process.env` at runtime. Do not use a `VITE_`-prefixed secret, build-time string replacement, or a generated key-bearing module to make the key available: these approaches embed credentials in JavaScript or packaged assets.
+
+Use this workflow instead:
+
+1. For local development, read `TYPESAFE_API_KEY` in Node-side tooling only. The simplest supported setup is for the user to copy their key from `.env` into the extension's options page.
+2. Optionally implement `scripts/setup-local-key.ts`: a local Playwright helper reads `.env`, opens the unpacked extension's actual options page in a dedicated development profile, and fills/saves the key through the normal settings UI. It must target the verified extension origin, never Gmail or another website, and disable screenshots, video, tracing, and key-bearing logs for the provisioning step. Do not create an externally accessible key-import endpoint.
+3. Save the key in restricted `chrome.storage.local`, accessible only to trusted extension contexts. The worker reads it for requests. Do not expose it to content scripts.
+4. Provisioning a key does not acknowledge the email-data disclosure or enable real-email processing. Those remain explicit user actions.
+5. For a distributed extension, users provide their own key through settings; `.env` is neither included nor required on their computer.
+6. Builds, mock tests, and CI work without a real `.env` or key. If an explicitly requested live developer test uses `.env`, keep its execution and artifacts separate from normal recorded tests.
+
+Document both local setup paths in README. Include a production-artifact verification that the supplied key and `.env` files are absent from `dist/` and the store ZIP. Key replacement/removal must invalidate local provider authorization state without leaking the old value.
+
 ## 9. Gmail adapter and lifecycle requirements
 
 Gmail is a dynamically changing single-page application. Observe a bounded list container, not the entire document on every mutation. Debounce extraction and process changed rows only. Ignore mutations created by the extension itself.
@@ -416,9 +441,10 @@ README must explain prerequisites, API-key setup, exact outbound data, synthetic
 Local installation:
 
 1. Install dependencies using the pinned package manager.
-2. Run required checks and production build.
-3. Open `chrome://extensions`, enable Developer mode, and Load unpacked using `dist/`.
-4. Enter key and acknowledge disclosure, test with synthetic data, then enable in Gmail.
+2. Copy `.env.example` to `.env` and provide `TYPESAFE_API_KEY` locally for developer setup; never commit it. Builds and fixture tests do not require a key.
+3. Run required checks and production build.
+4. Open `chrome://extensions`, enable Developer mode, and Load unpacked using `dist/`.
+5. Enter the key from `.env` in extension settings (or use the local provisioning helper), acknowledge disclosure, test with synthetic data, then enable in Gmail.
 
 Prepare a store ZIP containing the built extension with manifest at the ZIP root. Exclude source secrets, fixtures/test-host permissions, node_modules, and development tooling. Prepare a clear description, screenshots, icons, privacy policy text, and permission justification. A public hosted privacy policy/store submission may be a later task; a private GitHub repository is not a publicly accessible policy URL. Verify current Chrome Web Store asset/policy requirements when packaging. Do not claim it is published until an actual store listing is approved and visible.
 
@@ -443,6 +469,7 @@ Prepare a store ZIP containing the built extension with manifest at the ZIP root
 - Category and critical thresholds are independent and changing them does not unnecessarily call Jev again.
 - Filters/priority queue are extension-owned; Gmail native order/actions/keyboard controls remain functional.
 - Ambiguity, missing context, API errors, and excluded messages are represented explicitly.
+- Local `.env` key provisioning and `.env.example` are documented; real keys are ignored and never bundled or committed.
 - No real-email API calls before disclosure acknowledgment and enablement.
 - No bodies/attachments, Gmail writes, telemetry, exposed keys, or cross-account cache reuse.
 - Repeated Gmail rendering does not duplicate controls or repeat cached inference unnecessarily.
