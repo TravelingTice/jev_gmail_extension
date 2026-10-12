@@ -1,0 +1,10 @@
+.vite/
+og-image.html
+.env*
+.analytics-password.local
+node_modules/
+public/
+.vercel/
+tests/
+.agents/
+skills-lock.json

@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GmailClass - Gmail Email Classifier powered by Jev</title>
+    <meta
+      name="description"
+      content="GmailClass - Gmail Email Classifier Powered By Jev. Describe your categories and see clear, colorful labels directly in your Gmail inbox."
+    />
+    <meta name="author" content="Tice Kralt" />
+    <link rel="canonical" href="https://gmailclass.ticekralt.com/" />
+    <meta property="og:title" content="GmailClass - Gmail Email Classifier powered by Jev" />
+    <meta
+      property="og:description"
+      content="GmailClass - Gmail Email Classifier Powered By Jev. Describe your categories and see clear, colorful labels directly in your Gmail inbox."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://gmailclass.ticekralt.com/" />
+    <meta property="og:site_name" content="GmailClass" />
+    <meta property="og:locale" content="en_US" />
+    <meta
+      property="og:image"
+      content="https://gmailclass.ticekralt.com/gmailclass-og.png"
+    />
+    <meta
+      property="og:image:secure_url"
+      content="https://gmailclass.ticekralt.com/gmailclass-og.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="GmailClass: your inbox, labeled in your own words, with colorful category labels and the GmailClass mascot."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="GmailClass - Gmail Email Classifier powered by Jev" />
+    <meta
+      name="twitter:description"
+      content="GmailClass - Gmail Email Classifier Powered By Jev. Describe your categories and see clear, colorful labels directly in your Gmail inbox."
+    />
+    <meta
+      name="twitter:image"
+      content="https://gmailclass.ticekralt.com/gmailclass-og.png"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="GmailClass: your inbox, labeled in your own words, with colorful category labels and the GmailClass mascot."
+    />
+    <meta name="twitter:site" content="@TravelingTice" />
+    <meta name="twitter:creator" content="@TravelingTice" />
+    <link rel="icon" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="/">
+          <img src="/logo.png" alt="" />
+          GmailClass
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#examples">Examples</a>
+          <a href="#demo">Demo</a>
+          <a href="/privacy">Privacy</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <section class="wrap hero">
+        <div>
+          <h1>Your inbox, labeled in your own words.</h1>
+          <p class="lead">
+            GmailClass adds labels to the emails in your inbox. You configure
+            what labels these should be, and how to categorize them.
+          </p>
+          <div class="actions">
+            <a
+              class="button primary"
+              href="/download"
+              data-event="download_click"
+            >
+              <svg
+                class="button-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M15 3h6v6M10 14 21 3" />
+                <path
+                  d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"
+                />
+              </svg>
+              Download extension
+            </a>
+            <a class="button" href="#demo" data-event="demo_click"
+              >Watch demo</a
+            >
+          </div>
+          <p class="fine">
+            Unzip the download, open chrome://extensions, enable Developer mode,
+            and choose Load unpacked. This is an unpacked extension, not a
+            Chrome Web Store installation.
+          </p>
+          <p class="fine">
+            <img
+              class="powered-by-mark"
+              src="/typesafe-logo.svg"
+              alt="TypeSafe AI"
+            />
+            Powered by Jev
+          </p>
+        </div>
+        <div class="hero-visual">
+          <img
+            class="mascot"
+            src="/logo.png"
+            alt="GmailClass mascot, a smiling envelope giving two thumbs up"
+          />
+          <ol class="inbox" aria-hidden="true">
+            <li class="row">
+              <span class="avatar" style="--tone: #d4694e">N</span>
+              <div>
+                <div class="row-top">
+                  <strong>Northwind Studio</strong>
+                  <time>09:14</time>
+                </div>
+                <div class="subject-line">
+                  <span class="chip" style="--tone: #d4694e; --delay: 0.2s"
+                    >Invoices &amp; payments</span
+                  >
+                  Invoice 1842 is ready
+                </div>
+                <p class="snippet">Amount due €1,240, due Friday.</p>
+              </div>
+            </li>
+            <li class="row">
+              <span class="avatar" style="--tone: #1f7a75">K</span>
+              <div>
+                <div class="row-top">
+                  <strong>KLM</strong>
+                  <time>08:02</time>
+                </div>
+                <div class="subject-line">
+                  <span class="chip" style="--tone: #1f7a75; --delay: 0.8s"
+                    >Travel</span
+                  >
+                  Your flight to Lisbon moved
+                </div>
+                <p class="snippet">Departure is now 18:40 from gate D12.</p>
+              </div>
+            </li>
+            <li class="row">
+              <span class="avatar" style="--tone: #7a5ea7">M</span>
+              <div>
+                <div class="row-top">
+                  <strong>Mom</strong>
+                  <time>Yesterday</time>
+                </div>
+                <div class="subject-line">
+                  <span class="chip" style="--tone: #7a5ea7; --delay: 1.4s"
+                    >Personal</span
+                  >
+                  Dinner on Sunday
+                </div>
+                <p class="snippet">Can you bring the salad?</p>
+              </div>
+            </li>
+            <li class="row">
+              <span class="avatar" style="--tone: #4f8f4a">F</span>
+              <div>
+                <div class="row-top">
+                  <strong>Field Notes</strong>
+                  <time>Monday</time>
+                </div>
+                <div class="subject-line">
+                  <span class="chip" style="--tone: #4f8f4a; --delay: 2s"
+                    >Newsletters</span
+                  >
+                  <span
+                    class="chip"
+                    style="--tone: #c45b78; --ink-on: #fffaf3; --delay: 2.45s"
+                    >Promotions</span
+                  >
+                  This week in the workshop
+                </div>
+                <p class="snippet">A short essay, plus 20% off notebooks.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="examples">
+        <div class="wrap examples-layout">
+          <div>
+            <h2>
+              Instantly know if an email can be thrown away or should be kept.
+            </h2>
+            <p class="section-lead">
+              Mark a label with a specific color to instantly know if they can
+              be deleted or if they should be read. You usually already have an
+              auto-trigger on certain emails you throw away instantly.
+            </p>
+            <div class="tabs" role="group" aria-label="Example messages">
+              <button
+                type="button"
+                data-event="example_click"
+                data-tab="0"
+                aria-pressed="true"
+              >
+                Invoice
+              </button>
+              <button
+                type="button"
+                data-event="example_click"
+                data-tab="1"
+                aria-pressed="false"
+              >
+                Flight
+              </button>
+              <button
+                type="button"
+                data-event="example_click"
+                data-tab="2"
+                aria-pressed="false"
+              >
+                Family
+              </button>
+              <button
+                type="button"
+                data-event="example_click"
+                data-tab="3"
+                aria-pressed="false"
+              >
+                Security
+              </button>
+              <button
+                type="button"
+                data-event="example_click"
+                data-tab="4"
+                aria-pressed="false"
+              >
+                Two labels
+              </button>
+            </div>
+          </div>
+          <article
+            class="letter"
+            data-letter
+            data-count="1"
+            style="--tone: #d4694e"
+          >
+            <div class="letter-main">
+              <span class="avatar" data-avatar style="background: #d4694e"
+                >N</span
+              >
+              <div>
+                <div class="letter-top">
+                  <strong data-from>Northwind Studio</strong>
+                  <time data-time>09:14</time>
+                </div>
+                <h3 class="letter-subject" data-subject>
+                  Invoice 1842 is ready
+                </h3>
+              </div>
+            </div>
+            <div class="letter-copy">
+              <div class="stamps" data-stamps>
+                <span class="stamp" style="background: #d4694e"
+                  >Invoices &amp; payments</span
+                >
+              </div>
+              <p class="excerpt" data-excerpt>
+                Amount due €1,240, due Friday. The transfer reference is on the
+                PDF cover.
+              </p>
+            </div>
+            <p class="sr-only" aria-live="polite" data-status>
+              Northwind Studio. Invoice 1842 is ready.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="demo" id="demo">
+        <div class="wrap">
+          <h2>See it live in action.</h2>
+          <p class="section-lead">
+            Watch a short video in which the setup and functionality gets
+            explained. As well as how to set up the labels.
+          </p>
+          <div class="frame">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/w5EyX4SRJuY"
+              title="GmailClass demo"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+                web-share;
+              "
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="setup">
+        <div class="wrap">
+          <h2>All set up in 3 simple steps.</h2>
+          <div class="points">
+            <article class="point">
+              <span>01</span>
+              <h3>Download &amp; install</h3>
+              <p>
+                Install GmailClass in your browser, then open the extension to
+                get started.
+              </p>
+            </article>
+            <article class="point">
+              <span>02</span>
+              <h3>Create a TypeSafe API key</h3>
+              <p>
+                Create your API key at
+                <a href="https://typesafe.ai/" data-event="provider_click"
+                  >TypeSafe</a
+                >
+                and paste it into GmailClass. Your key stays in your browser.
+              </p>
+            </article>
+            <article class="point">
+              <span>03</span>
+              <h3>Enable &amp; reload Gmail</h3>
+              <p>
+                Choose your categories, enable the extension, and reload your
+                Gmail page. Labels appear beside the emails in your inbox.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section jev" id="jev">
+        <div class="wrap jev-card">
+          <div class="jev-intro">
+            <div class="jev-brand">
+              <img
+                class="jev-mark"
+                src="/typesafe-logo.svg"
+                alt="TypeSafe AI"
+              />
+              <span>Powered by Jev</span>
+            </div>
+            <h2>Meet Jev.<br />Your inbox’s instinct.</h2>
+            <p class="section-lead">
+              You describe what matters. Jev helps GmailClass spot it in your
+              inbox, with labels that match your categories.
+            </p>
+            <a
+              class="jev-link"
+              href="https://typesafe.ai/"
+              data-event="provider_click"
+              target="_blank"
+              >Discover TypeSafe <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <ul class="jev-points">
+            <li>
+              <strong>Your words, your categories.</strong>
+              Describe the mail you want to recognize. Jev checks each email
+              against those descriptions.
+            </li>
+            <li>
+              <strong>A little more certainty.</strong>
+              Each match comes with a probability. You set the threshold for
+              when a label appears.
+            </li>
+            <li>
+              <strong>Room for more than one label.</strong>
+              A travel receipt can be both a trip and an expense. Each category
+              is checked on its own.
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <span>GmailClass - Gmail Email Classifier Powered By Jev</span>
+        <div class="footer-links">
+          <span
+            >Made by
+            <a href="https://x.com/TravelingTice" rel="me">@Tice Kralt</a></span
+          >
+          <a href="/privacy">Privacy policy</a>
+        </div>
+      </div>
+    </footer>
+    <script src="/main.js"></script>
+    <script src="/tracking.js" defer></script>
+  </body>
+</html>

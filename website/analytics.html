@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <title>Analytics · GmailClass</title>
+    <link rel="icon" href="/favicon.png" />
+    <link rel="stylesheet" href="/analytics.css" />
+    <script src="/analytics.js" defer></script>
+  </head>
+  <body>
+    <header class="masthead">
+      <a class="brand" href="/"><img src="/logo.png" alt="" />GmailClass</a
+      ><span class="private">Private analytics</span>
+    </header>
+    <main>
+      <section id="login" class="login" hidden>
+        <h1>Analytics</h1>
+        <p>Sign in to see how GmailClass is doing.</p>
+        <form id="login-form">
+          <label for="password">Dashboard password</label
+          ><input
+            id="password"
+            type="password"
+            autocomplete="current-password"
+            required
+          /><button type="submit">
+            Open dashboard <span aria-hidden="true">↗</span>
+          </button>
+        </form>
+      </section>
+      <p id="message" role="status">Loading analytics…</p>
+      <div id="dashboard" hidden>
+        <div class="heading">
+          <div>
+            <h1>Analytics</h1>
+          </div>
+          <div class="tools">
+            <label for="range" class="sr-only">Date range</label
+            ><select id="range">
+              <option value="7">Last 7 days</option>
+              <option value="14" selected>Last 14 days</option>
+              <option value="30">Last 30 days</option>
+              <option value="90">Last 90 days</option></select
+            ><button id="refresh" class="quiet">Refresh</button
+            ><button id="logout" class="quiet">Sign out</button>
+          </div>
+        </div>
+        <div class="cards">
+          <article class="metric">
+            <span>Homepage views</span><strong id="views">—</strong
+            ><small>Page loads, including repeat visits</small>
+          </article>
+          <article class="metric">
+            <span>Engaged visits</span><strong id="engaged">—</strong
+            ><small>15 seconds with the page visible</small>
+          </article>
+          <article class="metric">
+            <span>Extension downloads</span><strong id="downloads">—</strong
+            ><small>ZIP deliveries, not confirmed installs</small>
+          </article>
+          <article class="metric accent">
+            <span>Label-use days</span><strong id="labels">—</strong
+            ><small>Participating browsers using labels each day</small>
+          </article>
+        </div>
+        <section class="panel chart-panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Daily homepage views</h2>
+            </div>
+            <span class="legend"><i></i> Homepage views</span>
+          </div>
+          <p id="period" class="muted"></p>
+          <div
+            id="chart"
+            class="chart"
+            role="img"
+            aria-label="Daily homepage views"
+          ></div>
+          <p id="empty" class="empty" hidden>
+            No homepage views yet. New activity will appear here as it arrives.
+          </p>
+          <details>
+            <summary>View daily counts</summary>
+            <div class="table-wrap">
+              <table>
+                <caption class="sr-only">
+                  Daily analytics counts in UTC
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Date (UTC)</th>
+                    <th scope="col">Views</th>
+                    <th scope="col">Engaged</th>
+                    <th scope="col">Downloads</th>
+                    <th scope="col">Label-use days</th>
+                  </tr>
+                </thead>
+                <tbody id="daily"></tbody>
+              </table>
+            </div>
+          </details>
+        </section>
+        <div class="lower-grid">
+          <section class="panel">
+            <h2>Website engagement</h2>
+            <div id="website-events" class="event-list"></div>
+          </section>
+          <section class="panel">
+            <h2>Extension usage</h2>
+            <div id="extension-events" class="event-list"></div>
+            <p class="muted footnote">
+              Extension events come from browsers that opt in. Label use is
+              counted once per browser per UTC day, after a fresh successful
+              classification with a matching label. No category or email text is
+              sent.
+            </p>
+          </section>
+        </div>
+        <footer>
+          <span id="updated"></span
+          ><span
+            >Daily totals · UTC · No visitor IDs
+            <span aria-hidden="true">•</span>
+            <a href="/privacy">Privacy policy</a></span
+          >
+        </footer>
+        <p class="muted footnote">
+          Collection starts with this release; earlier visits cannot be
+          recovered. Counts measure actions, not unique people. Automated
+          traffic is filtered where detectable, but public event endpoints
+          cannot guarantee human-only counts.
+        </p>
+      </div>
+    </main>
+  </body>
+</html>

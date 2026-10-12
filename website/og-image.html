@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>GmailClass social image source</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Figtree, "Avenir Next", sans-serif;
+        color: #14312c;
+      }
+      .social-card {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        position: relative;
+        padding: 56px 60px;
+        background: #f8f6f2;
+      }
+      .social-card::before {
+        content: "";
+        position: absolute;
+        width: 660px;
+        height: 660px;
+        border-radius: 50%;
+        background: #dfeae4;
+        right: -115px;
+        top: -60px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 24px;
+        font-weight: 700;
+        position: relative;
+      }
+      .brand img {
+        width: 45px;
+        height: 45px;
+        object-fit: contain;
+      }
+      .copy {
+        position: relative;
+        margin-top: 36px;
+        width: 625px;
+      }
+      h1 {
+        font-size: 98px;
+        line-height: 1;
+        letter-spacing: -0.06em;
+        margin: 0 0 26px;
+      }
+      .headline {
+        font-size: 51px;
+        line-height: 1.06;
+        letter-spacing: -0.045em;
+        font-weight: 700;
+        margin: 0;
+      }
+      .subtitle {
+        font-size: 23px;
+        line-height: 1.4;
+        color: #5c5348;
+        margin-top: 23px;
+        max-width: 490px;
+      }
+      .footer {
+        position: absolute;
+        left: 60px;
+        right: 60px;
+        bottom: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 18px;
+        color: #5c5348;
+      }
+      .powered {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+      }
+      .powered img {
+        height: 26px;
+        width: auto;
+      }
+      .inbox {
+        position: absolute;
+        top: 224px;
+        right: 40px;
+        width: 446px;
+        padding: 24px;
+        border-radius: 28px;
+        border: 1px solid rgba(27, 23, 20, 0.14);
+        background: #fffaf3;
+        box-shadow: 0 24px 60px rgba(72, 42, 16, 0.13);
+        transform: rotate(-3deg);
+      }
+      .inbox-title {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 18px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .inbox-title span {
+        color: #5c5348;
+        font-size: 14px;
+        font-weight: 400;
+      }
+      .mail {
+        padding: 14px 0;
+        border-top: 1px solid rgba(27, 23, 20, 0.1);
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .avatar {
+        width: 34px;
+        height: 34px;
+        flex: 0 0 auto;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: #dfeae4;
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .subject {
+        font-size: 16px;
+        font-weight: 600;
+        white-space: nowrap;
+        margin-top: 7px;
+        color: #1b1714;
+      }
+      .chip {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #fffaf3;
+        background: #1f7a75;
+      }
+      .invoice {
+        background: #d4694e;
+      }
+      .personal {
+        background: #7a5ea7;
+      }
+      .mascot {
+        position: absolute;
+        right: 83px;
+        top: 56px;
+        width: 182px;
+        height: 182px;
+        object-fit: contain;
+        transform: rotate(6deg);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="social-card">
+      <div class="brand">
+        <img src="/logo.png" alt="" /> A little clarity for your inbox.
+      </div>
+      <div class="copy">
+        <h1>GmailClass</h1>
+        <p class="headline">Your inbox, labeled<br />in your own words.</p>
+        <p class="subtitle">Gmail Email Classifier<br />Powered By Jev</p>
+      </div>
+      <img class="mascot" src="/logo.png" alt="GmailClass mascot" />
+      <section class="inbox">
+        <div class="inbox-title">
+          Inbox <span>Your categories. At a glance.</span>
+        </div>
+        <div class="mail">
+          <span class="avatar">K</span>
+          <div>
+            <span class="chip">Travel</span>
+            <div class="subject">Your flight to Lisbon moved</div>
+          </div>
+        </div>
+        <div class="mail">
+          <span class="avatar">N</span>
+          <div>
+            <span class="chip invoice">Invoices &amp; payments</span>
+            <div class="subject">Invoice 1842 is ready</div>
+          </div>
+        </div>
+        <div class="mail">
+          <span class="avatar">M</span>
+          <div>
+            <span class="chip personal">Personal</span>
+            <div class="subject">Dinner on Sunday</div>
+          </div>
+        </div>
+      </section>
+      <div class="footer">
+        <span>gmailclass.ticekralt.com</span
+        ><span class="powered"
+          ><img src="/typesafe-logo.svg" alt="TypeSafe" /> Powered by Jev</span
+        >
+      </div>
+    </main>
+  </body>
+</html>

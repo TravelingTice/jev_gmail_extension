@@ -1,0 +1,17 @@
+node_modules/
+.vercel/
+dist/
+.env
+.env.*
+!.env.example
+*.zip
+coverage/
+playwright-report/
+test-results/
+blob-report/
+.DS_Store
+browser-profiles/
+*.local
+.vite/
+.playwright-mcp/
+dist
