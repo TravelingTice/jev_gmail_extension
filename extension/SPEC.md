@@ -1,8 +1,8 @@
-# Gmail email classifier
+# GmailClass
 
 Detailed product and implementation specification for a future implementation agent.
 
-- **Extension name:** Gmail email classifier (use this exact spelling in the manifest, UI, documentation, and store listing).
+- **Extension name:** GmailClass (use this exact spelling in the manifest, UI, documentation, and store listing). Description is `GmailClass - Gmail Email Classifier Powered By Jev`.
 - **Repository:** https://github.com/TravelingTice/jev_gmail_extension — private.
 - **Working directory:** `~/code/TravelingTice/jev_gmail_extension`.
 - **Spec date:** 2026-10-11.
@@ -285,7 +285,7 @@ Keep classification logic pure and independent of Chrome APIs and Gmail DOM. Inj
 
 ## 7. Manifest V3 and extension architecture
 
-Manifest name must be `Gmail email classifier`. Set `manifest_version: 3`, an action popup, options page, module background service worker, icons, and a declarative isolated-world content script restricted to `https://mail.google.com/*` in the top frame.
+Manifest name must be `GmailClass`. Set `manifest_version: 3`, an action popup, options page, module background service worker, icons, and a declarative isolated-world content script restricted to `https://mail.google.com/*` in the top frame.
 
 Initial permissions: `storage` and `alarms` (alarms only if used for persisted retry/recovery). Host access: Gmail and `https://api.typesafe.ai/*`. Avoid `tabs`, `scripting`, `identity`, `cookies`, `debugger`, broad `<all_urls>`, and `unlimitedStorage` unless a concrete requirement proves one necessary. A declarative content script and sender metadata generally avoid several of these permissions.
 
@@ -509,3 +509,7 @@ Reference links are starting points. Verify current APIs and tooling versions at
 ## 19. Copyable prompt for the implementation agent
 
 > Build “Gmail email classifier” in this repository according to SPEC.md. Read it fully and follow its scope, privacy/data flow, custom overlapping categories, extension-owned filters/priority queue, TypeScript architecture, Manifest V3 requirements, and repository workflow rules. Use the linked open-source projects as references while verifying current source through the GitHub CLI. Implement a complete fixture demo and tests before relying on a live inbox. Use TypeScript, Prettier, ESLint, Vitest, and Playwright; actually run typecheck, explicitly targeted lint, formatting checks, tests, and a production build, fix failures, and report outcomes. Do not run standalone pnpm run lint. Create snake_case branches without a codex/ prefix. Keep the repository private. Generate the logo using the prompt and authorized Playwright/paid-ChatGPT workflow in the spec, letting the user complete authentication challenges as necessary. Finish a loadable unpacked extension, documentation, and store-ready package; report any genuinely unavailable live smoke test or logo step precisely. Do not publish the extension or expand permissions/features beyond this spec without a separate user request.
+
+## 20. Analytics scope decision — 12 October 2026
+
+The owner explicitly requested a private website dashboard with minimal, privacy-preserving website and extension usage events. This decision supersedes the earlier no-telemetry/no-server restrictions only for the following bounded scope: first-party fixed event names, daily aggregate counters without identifiers or user content, optional extension reporting off by default, and host permission limited to `https://gmailclass.ticekralt.com/*`. Gmail writes, body reads, and broader tracking remain prohibited. Extension events are opt-in, activation, category setup, and label use once per browser per UTC day. Website views are page loads, not unique people; ZIP deliveries are not confirmed installations. Vercel and Neon may retain operational connection logs; disclosures must distinguish those logs from our aggregate analytics storage.
