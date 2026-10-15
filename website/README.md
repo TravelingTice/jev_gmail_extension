@@ -27,6 +27,4 @@ Production environment variables: `DATABASE_URL` (the dedicated free Neon databa
 
 The initial password is in the owner's gitignored `.analytics-password.local` file with mode 0600. It is excluded from deployment uploads.
 
-To update the ZIP download, run `pnpm build` and `pnpm package:store` in `../extension`, then copy `../extension/gmail-email-classifier.zip` to `assets/gmailclass.zip` before deploying. The ZIP is a local build artifact and is not committed. The homepage explains unpacked installation; there is no Chrome Web Store publication implied.
-
 Verified: automated event-contract/session/storage tests, extension opt-out and duplicate suppression, router/scheduler event hooks, Playwright MCP desktop/mobile/dashboard states, real production login/collection/download counting, and local Chromium extension opt-in/category reporting to production. Synthetic production counts were subtracted after verification.
