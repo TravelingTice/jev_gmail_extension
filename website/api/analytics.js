@@ -38,7 +38,7 @@ export default async function handler(req, res) {
         return res.status(403).end();
       if (privacyOptOut(req.headers) || bot(req.headers))
         return res.status(204).end();
-      await recordEvent(body.source, body.event);
+      await recordEvent(body);
       return res.status(204).end();
     }
     if (action === "login" && req.method === "POST") {

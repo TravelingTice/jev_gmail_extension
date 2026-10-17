@@ -18,6 +18,8 @@ export const EVENTS = {
     "labels_used",
   ],
 };
+export const REFS = ["x", "reddit", "hn", "producthunt", "other", "direct"];
+const REF_EVENTS = ["page_view", "download_click"];
 export const RETENTION_DAYS = 400;
 export const dayOf = (date = new Date()) => date.toISOString().slice(0, 10);
 export const datesFor = (days, now = new Date()) =>
@@ -33,16 +35,19 @@ export const datesFor = (days, now = new Date()) =>
     ),
   );
 export function validEvent(body) {
+  if (!body || typeof body !== "object" || Array.isArray(body)) return false;
+  const hasRef = Object.hasOwn(body, "ref");
   return (
-    body &&
-    typeof body === "object" &&
-    !Array.isArray(body) &&
     typeof body.source === "string" &&
     typeof body.event === "string" &&
     Object.hasOwn(EVENTS, body.source) &&
-    Object.keys(body).length === 2 &&
-    EVENTS[body.source]?.includes(body.event) &&
-    !(body.source === "website" && body.event === "extension_download")
+    Object.keys(body).length === (hasRef ? 3 : 2) &&
+    EVENTS[body.source].includes(body.event) &&
+    !(body.source === "website" && body.event === "extension_download") &&
+    (!hasRef ||
+      (body.source === "website" &&
+        REF_EVENTS.includes(body.event) &&
+        REFS.includes(body.ref)))
   );
 }
 export function database() {
@@ -54,13 +59,15 @@ export function database() {
 }
 export const INCREMENT_SQL = `WITH cleanup AS (
   DELETE FROM analytics_daily WHERE day < CURRENT_DATE - 400
-) INSERT INTO analytics_daily (day, source, event, count) VALUES ($1::date, $2, $3, 1)
+) INSERT INTO analytics_daily (day, source, event, count) SELECT $1::date, $2, unnest($3::text[]), 1
 ON CONFLICT (day, source, event) DO UPDATE SET count = analytics_daily.count + 1
 WHERE analytics_daily.count < 100000 RETURNING count`;
 // Atomic increment; no individual events or identifying fields are persisted.
-export async function recordEvent(source, event, sql = database()) {
+export async function recordEvent({ source, event, ref }, sql = database()) {
   if (!EVENTS[source]?.includes(event)) throw new Error("Invalid event");
-  return sql.query(INCREMENT_SQL, [dayOf(), source, event]);
+  if (ref !== undefined && !REFS.includes(ref)) throw new Error("Invalid ref");
+  const events = ref ? [event, `${event}.${ref}`] : [event];
+  return sql.query(INCREMENT_SQL, [dayOf(), source, events]);
 }
 export async function summary(days, sql = database()) {
   const dates = datesFor(days);

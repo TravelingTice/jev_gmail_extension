@@ -4,9 +4,9 @@ The production dashboard is https://gmailclass.ticekralt.com/analytics. Its data
 
 ## Data and limitations
 
-- Website: homepage page loads, 15 visible seconds of engagement, download clicks, delivered extension ZIPs, demo-link clicks, example clicks, and provider-link clicks.
+- Website: homepage page loads, 15 visible seconds of engagement, download clicks, demo-link clicks, example clicks, and provider-link clicks.
 - Extension: optional reporting, off by default, for first opt-in, classification activations, category additions, and fresh successful matching label classifications once per local browser per UTC day.
-- No unique visitors or unique people: there are no visitor, device, installation, or account IDs. Download delivery does not prove installation. Website visits cannot be linked to extension usage. Existing extension builds must be updated to report events.
+- No unique visitors or unique people: there are no visitor, device, installation, or account IDs. Download clicks do not prove installation. Website visits cannot be linked to extension usage. Existing extension builds must be updated to report events.
 - The database stores only UTC date, source, fixed event name, and count. Atomic updates are capped at 100,000 per event/day. Older totals are pruned after 400 days on subsequent reporting or dashboard reads. A separate single-row aggregate counter limits administrator login attempts without storing IPs.
 - Website collection respects DNT/GPC and skips detectable automation. Privacy disclosures describe providers' separate connection logs. Public event endpoints can be spoofed; counts are indicative, not audited conversion figures.
 

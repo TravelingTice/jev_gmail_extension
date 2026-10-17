@@ -46,16 +46,5 @@
       ]
     }
   ],
-  "outputDirectory": "public",
-  "functions": {
-    "api/download.js": {
-      "includeFiles": "assets/gmailclass.zip"
-    }
-  },
-  "rewrites": [
-    {
-      "source": "/download",
-      "destination": "/api/download"
-    }
-  ]
+  "outputDirectory": "public"
 }
