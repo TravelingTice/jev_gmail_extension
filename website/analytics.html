@@ -57,8 +57,8 @@
             ><small>15 seconds with the page visible</small>
           </article>
           <article class="metric">
-            <span>Extension downloads</span><strong id="downloads">—</strong
-            ><small>ZIP deliveries, not confirmed installs</small>
+            <span>Web Store clicks</span><strong id="downloads">—</strong
+            ><small>Download button clicks, not confirmed installs</small>
           </article>
           <article class="metric accent">
             <span>Label-use days</span><strong id="labels">—</strong
@@ -94,7 +94,7 @@
                     <th scope="col">Date (UTC)</th>
                     <th scope="col">Views</th>
                     <th scope="col">Engaged</th>
-                    <th scope="col">Downloads</th>
+                    <th scope="col">Store clicks</th>
                     <th scope="col">Label-use days</th>
                   </tr>
                 </thead>
@@ -102,6 +102,30 @@
               </table>
             </div>
           </details>
+        </section>
+        <section class="panel sources-panel">
+          <h2>Traffic sources</h2>
+          <div class="table-wrap">
+            <table>
+              <caption class="sr-only">
+                Homepage views and Web Store clicks by source
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Source</th>
+                  <th scope="col">Views</th>
+                  <th scope="col">Store clicks</th>
+                </tr>
+              </thead>
+              <tbody id="sources"></tbody>
+            </table>
+          </div>
+          <p class="muted footnote">
+            From the referring site, or a
+            <code>?ref=x|reddit|hn|producthunt</code>
+            link tag. X and some Reddit apps often hide the referrer, so tag
+            links you post there. Collection starts with this release.
+          </p>
         </section>
         <div class="lower-grid">
           <section class="panel">

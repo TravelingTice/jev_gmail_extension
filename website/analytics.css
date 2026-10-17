@@ -207,6 +207,9 @@ a:focus-visible {
   color: var(--muted);
   text-align: center;
 }
+.sources-panel {
+  margin-top: 24px;
+}
 .lower-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -130,7 +130,7 @@ function render(data) {
   for (const [id, key] of [
     ["views", "website:page_view"],
     ["engaged", "website:engaged_visit"],
-    ["downloads", "website:extension_download"],
+    ["downloads", "website:download_click"],
     ["labels", "extension:labels_used"],
   ])
     $(id).textContent = format(totals[key] || 0);
@@ -145,9 +145,32 @@ function render(data) {
         ...[
           "website:page_view",
           "website:engaged_visit",
-          "website:extension_download",
+          "website:download_click",
           "extension:labels_used",
         ].map((key) => format(row.counts[key] || 0)),
+      ]) {
+        const td = document.createElement("td");
+        td.textContent = value;
+        tr.append(td);
+      }
+      return tr;
+    }),
+  );
+  $("sources").replaceChildren(
+    ...[
+      ["x", "X"],
+      ["reddit", "Reddit"],
+      ["hn", "Hacker News"],
+      ["producthunt", "Product Hunt"],
+      ["other", "Other sites"],
+      ["direct", "Direct or unknown"],
+    ].map(([ref, label]) => {
+      const tr = document.createElement("tr");
+      for (const value of [
+        label,
+        ...["page_view", "download_click"].map((event) =>
+          format(totals[`website:${event}.${ref}`] || 0),
+        ),
       ]) {
         const td = document.createElement("td");
         td.textContent = value;
@@ -159,11 +182,6 @@ function render(data) {
   eventList(
     "website-events",
     [
-      [
-        "website:download_click",
-        "Download button clicks",
-        "Interest in trying the extension",
-      ],
       [
         "website:demo_click",
         "Demo clicks",

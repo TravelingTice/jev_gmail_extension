@@ -14,6 +14,10 @@ import handler from "../api/analytics.js";
 test("event contract rejects identifiers, category content, unknown events, and client download claims", () => {
   assert.equal(validEvent({ source: "website", event: "page_view" }), true);
   assert.equal(validEvent({ source: "extension", event: "labels_used" }), true);
+  assert.equal(
+    validEvent({ source: "website", event: "download_click", ref: "hn" }),
+    true,
+  );
   for (const body of [
     { source: "__proto__", event: "page_view" },
     { source: "constructor", event: "page_view" },
@@ -22,6 +26,13 @@ test("event contract rejects identifiers, category content, unknown events, and 
     { source: "website", event: "extension_download" },
     { source: "other", event: "page_view" },
     { source: "website", event: "unknown" },
+    {
+      source: "website",
+      event: "page_view",
+      ref: "https://news.ycombinator.com/",
+    },
+    { source: "website", event: "demo_click", ref: "hn" },
+    { source: "extension", event: "labels_used", ref: "x" },
   ])
     assert.equal(Boolean(validEvent(body)), false);
 });
@@ -63,17 +74,23 @@ test("aggregate storage uses fixed fields, atomic updates, pruning and zero-fill
         : [{ count: "1" }];
     },
   };
-  await recordEvent("extension", "labels_used", sql);
+  await recordEvent({ source: "extension", event: "labels_used" }, sql);
   assert.deepEqual(calls[0].params, [
     datesFor(1)[0],
     "extension",
-    "labels_used",
+    ["labels_used"],
   ]);
+  await recordEvent(
+    { source: "website", event: "page_view", ref: "reddit" },
+    sql,
+  );
+  assert.deepEqual(calls[1].params[2], ["page_view", "page_view.reddit"]);
   assert.match(calls[0].query, /ON CONFLICT/);
   assert.match(
     calls[0].query,
     /DELETE FROM analytics_daily WHERE day < CURRENT_DATE - 400/,
   );
+  calls.length = 1;
   const rows = await summary(7, sql);
   assert.equal(rows.length, 7);
   assert.deepEqual(rows[0].counts, { "website:page_view": 2 });

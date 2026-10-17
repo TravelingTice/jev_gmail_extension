@@ -184,7 +184,11 @@
         This site counts homepage views, visits with at least 15 seconds of
         visible activity, download button clicks, demo-link clicks, example
         interactions, and TypeSafe link clicks. Page views include repeat
-        visits; download clicks are not proof of installation.
+        visits; download clicks are not proof of installation. Homepage views
+        and download clicks also record a coarse source: X, Reddit, Hacker News,
+        Product Hunt, another site, or direct. Your browser derives it from the
+        referring site or a <code>ref</code> link tag; the referring URL itself
+        is never sent.
       </p>
       <h2>How analytics is stored</h2>
       <p>
@@ -192,8 +196,8 @@
         date, a fixed event name, and an aggregate count are saved in Neon
         Postgres, for up to 400 days, with older totals pruned on subsequent
         activity. The analytics database does not store IP addresses, user
-        agents, URLs, referrers, precise event timestamps, cookies, visitor IDs,
-        or event-level histories. Counts cannot identify unique people or
+        agents, URLs, referrer URLs, precise event timestamps, cookies, visitor
+        IDs, or event-level histories. Counts cannot identify unique people or
         connect website visits to extension activity. We do not sell analytics
         data or use it for advertising.
       </p>
