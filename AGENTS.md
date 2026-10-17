@@ -6,4 +6,4 @@
 - Solo project: commit and push directly to `main`. Never create branches unless asked.
 - Do not run `pnpm run lint`. Lint explicit paths.
 - Do not commit `.env`, `dist/`, or browser profiles.
-- Keep the repository private unless a human asks to change visibility.
+- The repository is public and open source (MIT). Never commit secrets, personal emails, or real inbox data.
