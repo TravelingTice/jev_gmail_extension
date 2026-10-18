@@ -222,6 +222,15 @@ h1 {
   flex-shrink: 0;
 }
 
+.ph-badge {
+  display: inline-block;
+  margin-top: 1.25rem;
+}
+
+.ph-badge img {
+  display: block;
+}
+
 .hero-visual {
   position: relative;
   min-height: 520px;
