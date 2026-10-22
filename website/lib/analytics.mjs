@@ -102,22 +102,16 @@ export function equal(a, b) {
   return aa.length === bb.length && timingSafeEqual(aa, bb);
 }
 export function session(now = Date.now()) {
-  const expires = String(now + 12 * 3600000);
+  const expires = String(now + 30 * 86400000);
   return `${expires}.${createHmac("sha256", process.env.ANALYTICS_PASSWORD).update(expires).digest("hex")}`;
 }
-export function authenticated(cookie = "", now = Date.now()) {
-  if (!process.env.ANALYTICS_PASSWORD) return false;
-  const token = cookie
-    .split(";")
-    .map((part) => part.trim())
-    .find((part) => part.startsWith("gmailclass_analytics="))
-    ?.slice("gmailclass_analytics=".length);
-  if (!token) return false;
+export function authenticated(token = "", now = Date.now()) {
+  if (!process.env.ANALYTICS_PASSWORD || !token) return false;
   const [expires, signature] = token.split(".");
   if (
     !/^\d+$/.test(expires) ||
     Number(expires) <= now ||
-    Number(expires) > now + 12 * 3600000
+    Number(expires) > now + 30 * 86400000
   )
     return false;
   return equal(

@@ -1,6 +1,21 @@
 const $ = (id) => document.getElementById(id);
 const format = (value) => new Intl.NumberFormat("en").format(value);
 let busy = false;
+const KEY = "gmailclass_analytics";
+const store = {
+  get: () => {
+    try {
+      return localStorage.getItem(KEY) || "";
+    } catch {
+      return "";
+    }
+  },
+  set: (v) => {
+    try {
+      v ? localStorage.setItem(KEY, v) : localStorage.removeItem(KEY);
+    } catch {}
+  },
+};
 function showLogin() {
   $("login").hidden = false;
   $("dashboard").hidden = true;
@@ -238,8 +253,10 @@ async function load() {
   try {
     const response = await fetch(`/api/analytics?days=${$("range").value}`, {
       cache: "no-store",
+      headers: { Authorization: `Bearer ${store.get()}` },
     });
     if (response.status === 401) {
+      store.set("");
       showLogin();
       $("message").textContent = "";
       return;
@@ -268,6 +285,7 @@ $("login-form").addEventListener("submit", async (event) => {
     });
     const data = await response.json();
     if (!response.ok) throw new Error(data.error);
+    store.set(data.token);
     $("password").value = "";
     await load();
   } catch (error) {
@@ -278,17 +296,10 @@ $("login-form").addEventListener("submit", async (event) => {
 });
 $("range").addEventListener("change", load);
 $("refresh").addEventListener("click", load);
-$("logout").addEventListener("click", async () => {
-  try {
-    const response = await fetch("/api/analytics?action=logout", {
-      method: "POST",
-    });
-    if (!response.ok) throw new Error("Could not sign out.");
-    showLogin();
-    $("message").textContent = "";
-  } catch (error) {
-    $("message").textContent = error.message;
-  }
+$("logout").addEventListener("click", () => {
+  store.set("");
+  showLogin();
+  $("message").textContent = "";
 });
 void load();
 setInterval(() => {

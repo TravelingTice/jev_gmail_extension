@@ -1,6 +1,6 @@
 # GmailClass website analytics
 
-The production dashboard is https://gmailclass.ticekralt.com/analytics. Its data requires a password, with a signed, secure, HttpOnly administrator cookie lasting 12 hours. The page carries both a `noindex` meta tag and an `X-Robots-Tag` header, is omitted from the sitemap, and is not linked from the public pages. It stays crawlable so search engines can read its `noindex` directive. The homepage remains indexable.
+The production dashboard is https://gmailclass.ticekralt.com/analytics. Its data requires a password, with a signed administrator token kept in the browser's local storage for 30 days. The page carries both a `noindex` meta tag and an `X-Robots-Tag` header, is omitted from the sitemap, and is not linked from the public pages. It stays crawlable so search engines can read its `noindex` directive. The homepage remains indexable.
 
 ## Data and limitations
 

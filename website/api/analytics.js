@@ -61,22 +61,11 @@ export default async function handler(req, res) {
           .json({ error: "Too many attempts. Try again in a minute." });
       if (!equal(req.body?.password || "", process.env.ANALYTICS_PASSWORD))
         return res.status(401).json({ error: "Incorrect password." });
-      res.setHeader(
-        "Set-Cookie",
-        `gmailclass_analytics=${session()}; HttpOnly; Secure; SameSite=Strict; Path=/api/analytics; Max-Age=43200`,
-      );
-      return res.json({ ok: true });
-    }
-    if (action === "logout" && req.method === "POST") {
-      res.setHeader(
-        "Set-Cookie",
-        "gmailclass_analytics=; HttpOnly; Secure; SameSite=Strict; Path=/api/analytics; Max-Age=0",
-      );
-      return res.json({ ok: true });
+      return res.json({ token: session() });
     }
     if (action !== "summary" || req.method !== "GET")
       return res.status(405).end();
-    if (!authenticated(req.headers.cookie))
+    if (!authenticated(req.headers.authorization?.replace("Bearer ", "")))
       return res.status(401).json({ error: "Sign in to view analytics." });
     const days = Number(req.query.days || 14);
     if (![7, 14, 30, 90].includes(days))

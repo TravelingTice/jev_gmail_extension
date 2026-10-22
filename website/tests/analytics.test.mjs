@@ -46,16 +46,16 @@ test("UTC ranges include today and missing days across year boundary", () => {
 test("administrator sessions reject tampering, expiry, missing secrets and password rotation", () => {
   process.env.ANALYTICS_PASSWORD = "synthetic-test-password";
   const token = session(1000);
-  assert.equal(authenticated(`gmailclass_analytics=${token}`, 1001), true);
-  assert.equal(authenticated(`gmailclass_analytics=${token}x`, 1001), false);
+  assert.equal(authenticated(`${token}`, 1001), true);
+  assert.equal(authenticated(`${token}x`, 1001), false);
   assert.equal(
-    authenticated(`gmailclass_analytics=${token}`, 1000 + 12 * 3600000),
+    authenticated(`${token}`, 1000 + 30 * 86400000),
     false,
   );
   process.env.ANALYTICS_PASSWORD = "rotated-password";
-  assert.equal(authenticated(`gmailclass_analytics=${token}`, 1001), false);
+  assert.equal(authenticated(`${token}`, 1001), false);
   delete process.env.ANALYTICS_PASSWORD;
-  assert.equal(authenticated(`gmailclass_analytics=${token}`, 1001), false);
+  assert.equal(authenticated(`${token}`, 1001), false);
 });
 test("aggregate storage uses fixed fields, atomic updates, pruning and zero-filled days", async () => {
   const calls = [];
